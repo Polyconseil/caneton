@@ -1,0 +1,6 @@
+include README.rst
+
+graft caneton
+
+global-exclude *.py[cod] __pycache__ *.so
+exclude .pylintrc

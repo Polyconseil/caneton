@@ -1,0 +1,103 @@
+{
+    "filename" : "test.dbc",
+    "version" : null,
+    "attribute_definitions" : {
+        "GenMsgSendType" : {
+            "0" : "Cyclic",
+            "1" : "not_used",
+            "2" : "not_used",
+            "3" : "not_used",
+            "4" : "not_used",
+            "5" : "Cyclic",
+            "6" : "not_used",
+            "7" : "IfActive",
+            "8" : "NoMsgSendType"
+        }
+    },
+    "messages" : {
+        "1793" : {
+            "name" : "CU_MULTI_FOO_BAR",
+            "sender" : "CU",
+            "length" : 8,
+            "attributes" : {
+                "GenMsgCycleTime" : "200",
+                "GenMsgSendType" : "0"
+            },
+            "signals" : {
+                "Foo1" : {
+                    "bit_start" : 48,
+                    "length" : 8,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "multiplexed" : 2
+                },
+                "Foo2" : {
+                    "bit_start" : 8,
+                    "length" : 1,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "multiplexed" : 0
+                },
+                "Foo3" : {
+                    "bit_start" : 40,
+                    "length" : 1,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "multiplexed" : 0
+                },
+                "Foo4" : {
+                    "bit_start" : 32,
+                    "length" : 8,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "multiplexed" : 0
+                },
+                "Bar2" : {
+                    "bit_start" : 24,
+                    "length" : 16,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "unit" : "V",
+                    "multiplexed" : 1
+                },
+                "Bar1" : {
+                    "bit_start" : 8,
+                    "length" : 16,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "unit" : "V",
+                    "multiplexed" : 1
+                },
+                "Mode" : {
+                    "bit_start" : 0,
+                    "length" : 8,
+                    "little_endian" : 1,
+                    "factor" : 1,
+                    "offset" : 0,
+                    "min" : 0,
+                    "max" : 0,
+                    "multiplexor" : true
+                }
+            },
+            "has_multiplexor" : true
+        }
+    }
+}
