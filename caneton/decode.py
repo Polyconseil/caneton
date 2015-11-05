@@ -143,7 +143,7 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         # Decode signal only when no multiplexor or the signal is associated to the
         # current mode or the signal is not multiplexed
         if (multiplexing_mode is None or
-                multiplexing_mode == signal_info.get('multiplexed', multiplexing_mode)):
+                multiplexing_mode == signal_info.get('multiplexing', multiplexing_mode)):
             signal = signal_decode(
                 signal_name, signal_info, message_binary_msb, message_binary_lsb,
                 message_binary_length)
