@@ -23,10 +23,9 @@ setup(
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Environment :: Debian",
         "Intended Audience :: Developers",
         "Natural Language :: English",
-        "Programming Language :: Python 3",
+        "Programming Language :: Python :: 3",
     ],
     test_suite='',
     include_package_data=True,
