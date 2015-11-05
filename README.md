@@ -16,8 +16,9 @@ import caneton
 with open('dbc.json') as dbc_file:
     dbc_json = json.loads(dbc_file.read())
     message_length, message_data = caneton.hex_ascii_to_bytes('01780178010000')
-    message = caneton.message_decode(message_id=0x701, message_data=message_data,
-        message_length=message_length, dbc_json=dbc_json)
+    message = caneton.message_decode(message_id=0x701,
+        message_length=message_length, message_data=message_data,
+        dbc_json=dbc_json)
     print(message)
 ```
 
