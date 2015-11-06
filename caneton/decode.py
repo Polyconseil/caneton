@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
+from . import exceptions
 from . import utils
 
 MESSAGE_MAX_LENGTH = 8
@@ -21,6 +22,9 @@ def signal_decode(signal_name, signal_info,
 
     Returns:
         signal: dict, a decoded signal from the CAN data message
+
+    Raises:
+        exceptions.InvalidBitStart: when signal's bit start is too high
     """
     signal = {
         'name': signal_name,
@@ -36,7 +40,7 @@ def signal_decode(signal_name, signal_info,
         message_binary = message_binary_msb
 
     if bit_start >= message_binary_length:
-        raise ValueError("Bit start %d of signal %s is too high" % (
+        raise exceptions.InvalidBitStart("Bit start %d of signal %s is too high" % (
             bit_start, signal_name))
 
     if is_little_endian:
@@ -98,10 +102,11 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         message: decoded message with list of signals.
 
     Raises:
-        ValueError: when there is a decoding error.
+        exceptions.InvalidDBC: when used DBC has not messages entry
+        exceptions.MessageNotFound: when message's ID is not found in the DBC
     """
     if 'messages' not in dbc_json:
-        raise ValueError("invalid DBC file (no messages entry)")
+        raise exceptions.InvalidDBC("Invalid DBC file (no messages entry)")
 
     # Initialize the returns
     message = {'signals': []}
@@ -111,7 +116,7 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         message['name'] = message_info['name']
         message['id'] = message_id
     except KeyError:
-        raise ValueError("message ID {id:d} (0x{id:x}) not found in DBC".format(id=message_id))
+        raise exceptions.MessageNotFound("Message ID {id:d} (0x{id:x}) not found in DBC".format(id=message_id))
 
     # The CAN message data is always 8 bytes so it's required to truncate it to keep only
     # the useful bytes (nop when already truncated)
