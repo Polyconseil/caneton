@@ -54,6 +54,9 @@ def signal_decode(signal_name, signal_info,
         signal['bit_end'] = signal['bit_start'] + signal['length']
 
     s_value = message_binary[signal['bit_start']:signal['bit_end']]
+    if not s_value:
+        raise ValueError("The string value extracted for signal '%s' is empty [%d:%d]." %
+            (signal_name, signal['bit_start'], signal['bit_end']))
 
     signal['factor'] = int(signal_info.get('factor', 1))
     signal['offset'] = int(signal_info.get('offset', 0))
