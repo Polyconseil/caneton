@@ -6,12 +6,12 @@ from .decode import (MESSAGE_MAX_LENGTH,
     message_decode, message_get_current_multiplexing_mode,
     signal_decode)
 from .utils import swap_bytes, hex_ascii_to_bytes
-from .exceptions import DecodingError, InvalidBitStart, InvalidDBC, MessageNotFound
+from .exceptions import CanetonError, DecodingError, InvalidBitStart, InvalidDBC, MessageNotFound
 
 __all__ = [
     'MESSAGE_MAX_LENGTH',
     'message_decode', 'message_get_current_multiplexing_mode',
     'signal_decode',
     'swap_bytes', 'hex_ascii_to_bytes',
-    'DecodingError', 'InvalidBitStart', 'InvalidDBC', 'MessageNotFound'
+    'CanetonError', 'DecodingError', 'InvalidBitStart', 'InvalidDBC', 'MessageNotFound'
 ]
