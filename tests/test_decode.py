@@ -17,7 +17,7 @@ class TestDecode(TestCase):
         }
         message_binary_lsb = '0000000010101111000000001010001100000000'
         # message_binary_msb is not required (LSB)
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(caneton.DecodingError) as cm:
             caneton.signal_decode(
                 "Foo", signal_info, None, message_binary_lsb, len(message_binary_lsb))
         exception = cm.exception

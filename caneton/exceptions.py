@@ -8,7 +8,7 @@ class CanetonError(Exception):
 
 
 class DecodingError(CanetonError):
-    """Raised when there is a CAN frame decoding error."""
+    """Raised when there is a CAN message decoding error."""
 
 
 class InvalidBitStart(DecodingError):

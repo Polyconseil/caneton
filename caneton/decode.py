@@ -55,7 +55,8 @@ def signal_decode(signal_name, signal_info,
 
     s_value = message_binary[signal['bit_start']:signal['bit_end']]
     if not s_value:
-        raise ValueError("The string value extracted for signal '%s' is empty [%d:%d]." %
+        raise exceptions.DecodingError(
+            "The string value extracted for signal '%s' is empty [%d:%d]." %
             (signal_name, signal['bit_start'], signal['bit_end']))
 
     signal['factor'] = int(signal_info.get('factor', 1))
@@ -119,7 +120,8 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         message['name'] = message_info['name']
         message['id'] = message_id
     except KeyError:
-        raise exceptions.MessageNotFound("Message ID {id:d} (0x{id:x}) not found in DBC".format(id=message_id))
+        raise exceptions.MessageNotFound(
+            "Message ID {id:d} (0x{id:x}) not found in DBC".format(id=message_id))
 
     # The CAN message data is always 8 bytes so it's required to truncate it to keep only
     # the useful bytes (nop when already truncated)
