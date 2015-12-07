@@ -3,7 +3,6 @@
 #
 
 from . import exceptions
-from . import utils
 
 MESSAGE_MAX_LENGTH = 8
 

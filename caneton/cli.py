@@ -7,6 +7,7 @@
 # Requires a DBC file.
 #
 
+import binascii
 import json
 import argparse
 
@@ -56,7 +57,8 @@ def args_cleanup(args):
 
     try:
         # Convert hexadecimal string to bytes
-        length, data = caneton.hex_ascii_to_bytes(data)
+        data = binascii.unhexlify(data)
+        length = len(data)
     except ValueError:
         raise ValueError("Invalid data argument '%s'." % args.data)
 

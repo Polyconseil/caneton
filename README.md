@@ -18,14 +18,16 @@ To decode a CAN message, you must provide the message ID, the message data
 Caneton can be used as Python module:
 
 ```python
+import binascii
 import json
+
 import caneton
 
 with open('dbc.json') as dbc_file:
     dbc_json = json.loads(dbc_file.read())
-    message_length, message_data = caneton.hex_ascii_to_bytes('01780178010000')
+    message_data = binascii.unhexlify('01780178010000')
     message = caneton.message_decode(message_id=0x701,
-        message_length=message_length, message_data=message_data,
+        message_length=len(message_data), message_data=message_data,
         dbc_json=dbc_json)
     print(message)
 ```
