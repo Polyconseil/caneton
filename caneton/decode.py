@@ -131,13 +131,14 @@ def message_decode(message_id, message_length, message_data, dbc_json):
     message_binary_length = message_length * 8
 
     # Motorola
-    # 0n to fit in n characters width with 0 padding
-    message_binary_msb = format(
-        int.from_bytes(message_data, byteorder='big', signed=False),
-        '0%db' % message_binary_length)
+    # 0n to fit in n characters width with 0 padding (can't use bin())
+    # [2:] to remove '0b' prefix and zfill constant length with 0 padding
+    message_binary_msb = bin(int.from_bytes(message_data, 'big'))[2:].zfill(
+        message_binary_length)
 
     # For Intel, identical but swapped
-    message_binary_lsb = utils.swap_bytes(message_binary_msb)
+    message_binary_lsb = bin(int.from_bytes(message_data, 'little'))[2:].zfill(
+        message_binary_length)
 
     if message_info.get('has_multiplexor', False):
         multiplexing_mode = message_get_current_multiplexing_mode(
