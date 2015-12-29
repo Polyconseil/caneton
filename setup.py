@@ -10,7 +10,7 @@ setup(
     version=VERSION,
     author="Polyconseil dev team",
     author_email="autolib-dev@polyconseil.fr",
-    description=("Decode CAN messages"),
+    description="Decode CAN messages",
     license="BSD-3-Clause",
     keywords="CAN DBC",
     url="https://github.com/polyconseil/caneton",
