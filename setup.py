@@ -3,7 +3,7 @@
 
 from setuptools import find_packages, setup
 
-VERSION = '1.0.3'
+VERSION = '1.0.4'
 
 setup(
     name="caneton",
