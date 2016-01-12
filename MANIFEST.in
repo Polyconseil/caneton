@@ -2,5 +2,5 @@ include README.md
 
 graft caneton
 
-global-exclude *.py[cod] __pycache__ *.so
-exclude .pylintrc
+global-exclude *.py[cod]
+prune __pycache__
