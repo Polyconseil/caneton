@@ -58,8 +58,8 @@ def signal_decode(signal_name, signal_info,
             "The string value extracted for signal '%s' is empty [%d:%d]." %
             (signal_name, signal['bit_start'], signal['bit_end']))
 
-    signal['factor'] = int(signal_info.get('factor', 1))
-    signal['offset'] = int(signal_info.get('offset', 0))
+    signal['factor'] = float(signal_info.get('factor', 1.0))
+    signal['offset'] = float(signal_info.get('offset', 0.0))
     signal['value'] = int(s_value, 2) * signal['factor'] + signal['offset']
     signal['unit'] = signal_info.get('unit', '')
 

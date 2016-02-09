@@ -68,7 +68,7 @@
                     "bit_start" : 24,
                     "length" : 16,
                     "little_endian" : 1,
-                    "factor" : 1,
+                    "factor" : 0.5,
                     "offset" : 0,
                     "min" : 0,
                     "max" : 0,
