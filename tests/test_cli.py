@@ -23,9 +23,10 @@ class TestCLI(TestCase):
         expected_signals = [
             {'name': 'Mode', 'value': 1},
             {'name': 'Bar1', 'value': 376},
-            {'name': 'Bar2', 'value': 188},
+            {'name': 'Bar2', 'value': 188.0},
         ]
         self.assertEqual(len(signals), len(expected_signals))
         for (signal, expected_signal) in zip(signals, expected_signals):
             self.assertEqual(signal['name'], expected_signal['name'])
             self.assertEqual(signal['value'], expected_signal['value'], signal['name'])
+            self.assertIsInstance(signal['value'], type(expected_signal['value']), signal['name'])

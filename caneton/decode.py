@@ -6,7 +6,6 @@ from . import exceptions
 
 MESSAGE_MAX_LENGTH = 8
 
-
 def signal_decode(signal_name, signal_info,
         message_binary_msb, message_binary_lsb, message_binary_length):
     """
@@ -58,8 +57,8 @@ def signal_decode(signal_name, signal_info,
             "The string value extracted for signal '%s' is empty [%d:%d]." %
             (signal_name, signal['bit_start'], signal['bit_end']))
 
-    signal['factor'] = float(signal_info.get('factor', 1.0))
-    signal['offset'] = float(signal_info.get('offset', 0.0))
+    signal['factor'] = signal_info.get('factor', 1)
+    signal['offset'] = signal_info.get('offset', 0)
     signal['value'] = int(s_value, 2) * signal['factor'] + signal['offset']
     signal['unit'] = signal_info.get('unit', '')
 
