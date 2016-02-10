@@ -3,7 +3,7 @@
 
 from setuptools import find_packages, setup
 
-VERSION = '1.0.5'
+from caneton.version import VERSION
 
 setup(
     name="caneton",
