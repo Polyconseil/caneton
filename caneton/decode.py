@@ -149,7 +149,6 @@ def message_decode(message_id, message_length, message_data, dbc_json):
     message['raw_data'] = message_data
 
     if 'signals' not in message_info:
-        message['signals'] = []
         return message
 
     signals = sorted(message_info['signals'].items(), key=lambda t: int(t[1]['bit_start']))
