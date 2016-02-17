@@ -147,6 +147,11 @@ def message_decode(message_id, message_length, message_data, dbc_json):
     message['multiplexing_mode'] = multiplexing_mode
 
     message['raw_data'] = message_data
+
+    if 'signals' not in message_info:
+        message['signals'] = []
+        return message
+
     signals = sorted(message_info['signals'].items(), key=lambda t: int(t[1]['bit_start']))
     for signal_name, signal_info in signals:
         # Decode signal only when no multiplexor or the signal is associated to the

@@ -3,6 +3,7 @@
 #
 
 from unittest import TestCase
+import json
 
 import caneton
 
@@ -23,3 +24,16 @@ class TestDecode(TestCase):
         exception = cm.exception
         self.assertEqual(str(exception),
             "The string value extracted for signal 'Foo' is empty [-8:8].")
+
+    def test_message_wo_signals(self):
+        message_id = 542
+        message_length = 8
+        message_data = b' ' * message_length
+
+        with open('./tests/dbc.json', 'r') as f:
+            dbc_json = json.loads(f.read())
+
+        caneton_message = caneton.message_decode(
+            message_id=message_id, message_length=message_length,
+            message_data=message_data, dbc_json=dbc_json)
+        self.assertEqual(caneton_message['signals'], [])

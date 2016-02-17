@@ -98,6 +98,14 @@
                 }
             },
             "has_multiplexor" : true
+        },
+        "542" : {
+            "name" : "BUS_MMI_4",
+            "sender" : "MASTER33",
+            "length" : 8,
+            "attributes" : {
+                "GenMsgCycleTime" : "200"
+            }
         }
     }
 }
