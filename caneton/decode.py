@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
 # Copyright © 2015 Polyconseil SAS
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
+from . import compat
 from . import exceptions
+
 
 MESSAGE_MAX_LENGTH = 8
 
@@ -144,11 +147,11 @@ def message_decode(message_id, message_length, message_data, dbc_json):
     # Motorola
     # 0n to fit in n characters width with 0 padding (can't use bin())
     # [2:] to remove '0b' prefix and zfill constant length with 0 padding
-    message_binary_msb = bin(int.from_bytes(message_data, 'big'))[2:].zfill(
+    message_binary_msb = bin(compat.int_from_bytes(message_data, 'big'))[2:].zfill(
         message_binary_length)
 
     # For Intel, identical but swapped
-    message_binary_lsb = bin(int.from_bytes(message_data, 'little'))[2:].zfill(
+    message_binary_lsb = bin(compat.int_from_bytes(message_data, 'little'))[2:].zfill(
         message_binary_length)
 
     if message_info.get('has_multiplexor', False):
