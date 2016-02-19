@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright © 2015 Polyconseil SAS
 # SPDX-License-Identifier: BSD-3-Clause
 #

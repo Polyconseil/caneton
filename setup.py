@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Copyright (c) Polyconseil SAS. All rights reserved.
 
 from setuptools import find_packages, setup
@@ -25,6 +25,7 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
+        "Programming Language :: Python :: 2 :: 7",
         "Programming Language :: Python :: 3",
     ],
     test_suite='',
