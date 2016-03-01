@@ -38,8 +38,8 @@ def signal_decode(signal_name, signal_info,
         message_binary = message_binary_msb
 
     if bit_start >= message_binary_length:
-        raise exceptions.InvalidBitStart("Bit start %d of signal %s is too high" % (
-            bit_start, signal_name))
+        raise exceptions.InvalidBitStart(
+            "Bit start %d of signal %s is too high" % (bit_start, signal_name))
 
     if is_little_endian:
         # In Intel format (little-endian), bit_start is the position of the
@@ -89,6 +89,19 @@ def message_get_current_multiplexing_mode(message_info, message_binary_msb, mess
 
     return multiplexing_mode
 
+def message_get_signal(message, signal_name):
+    """Loop over signals to find the requested signal.
+
+    Arguments:
+        message: dict, the message provided by message_decode()
+        signal_name: str, name of the signal (from DBC)
+
+    Return:
+        signal: dict, information about the decoded signal
+    """
+    for signal in message.get('signals', []):
+        if signal.get('name') == signal_name:
+            return signal
 
 def message_decode(message_id, message_length, message_data, dbc_json):
     """Decode a CAN message (also called a frame).

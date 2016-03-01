@@ -2,14 +2,16 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
-from .decode import (MESSAGE_MAX_LENGTH,
-    message_decode, message_get_current_multiplexing_mode,
-    signal_decode)
-from .exceptions import CanetonError, DecodingError, InvalidBitStart, InvalidDBC, MessageNotFound
+from .decode import (
+    MESSAGE_MAX_LENGTH, message_decode,
+    message_get_current_multiplexing_mode, message_get_signal, signal_decode)
+from .exceptions import (
+    CanetonError, DecodingError, InvalidBitStart, InvalidDBC,
+    MessageNotFound)
 
 __all__ = [
     'MESSAGE_MAX_LENGTH',
     'message_decode', 'message_get_current_multiplexing_mode',
-    'signal_decode',
+    'message_get_signal', 'signal_decode',
     'CanetonError', 'DecodingError', 'InvalidBitStart', 'InvalidDBC', 'MessageNotFound'
 ]
