@@ -20,8 +20,8 @@ class TestCLI(TestCase):
         message = caneton.message_decode(**cleaned_args)
         self.assertEqual(message['name'], 'CU_MULTI_FOO_BAR')
         signals = message['signals']
+        # The multiplexor is excluded from the list of signals
         expected_signals = [
-            {'name': 'Mode', 'value': 1},
             {'name': 'Bar1', 'value': 376},
             {'name': 'Bar2', 'value': 188.0},
         ]
