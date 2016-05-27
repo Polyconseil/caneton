@@ -23,6 +23,8 @@ def int_from_bytes(data, byteorder, signed=False):
     if IS_PY3:
         return int.from_bytes(data, byteorder, signed)
 
+    if not len(data):
+        return 0
     if byteorder == 'big':
         data = bytearray(reversed(data))
     if isinstance(data, str):
