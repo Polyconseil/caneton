@@ -1,7 +1,7 @@
 Caneton
 =======
 
-Python 3 project under BSD license to decode messages (or frames) from a CAN bus.
+Python 2/3 project under BSD license to decode messages (or frames) from a CAN bus.
 
 DBC in JSON
 -----------
@@ -42,4 +42,4 @@ Tests
 
 To run the unit tests:
 
-`$ python3 -m unittest`
+`$ nosetests`
