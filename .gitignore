@@ -2,3 +2,4 @@ build/
 dist/
 caneton.egg-info/
 __pycache__/
+*.pyc
