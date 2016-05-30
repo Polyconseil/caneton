@@ -1,15 +1,13 @@
 language: python
-
 python:
-    - 2.7
-    - 3.4
-
+- 2.7
+- 3.4
 install:
-    - pip install -r requirements_dev.txt
-    - pip install --editable .
-    - pip freeze
-
+- pip install -r requirements_dev.txt
+- pip install --editable .
+- pip freeze
 script: make test
-
 notifications:
-    email: true
+  email: true
+  slack:
+    secure: BJFRi2FlADj3+zWygCQtOkjqJEdrSzd0wHl5MgYY2wLqg/fp0xh5UliQvybwdWxhad11JwCu1X91/bZCctFHEsZw7cD9qPcGmXOuLIpe/olmlUQzbpP0Gru7nOGh++yyk2/tKqgoiqFfz4bf2QKbjz+kuEc6Yo7Yk4FydAxcu2jSmLZtNPUuXi9CVNSOomZrcKEdBodQGHi/S7pyrl4tJDlF4S4ha3CXF+KphAJk8dhOcyko6CuMKWqrxjNKqMkrnEURvVxV3Nq4cTV6jh8fzbJwHnls7Q0DMYh7YUbBoY6ksRf9kYd2biUzFYwRMfqoMASdTPjYlliuEjmsnoIE7qt8J9CAXbrRxoqe0Ir1ZVYPZwTV/Jtr0quk/miHoF9FpfvlTnwfSSQJYRV3NrD5YU4vAaJAcxDyKhQXAiNLW3mj+uuESOktwbm/zsQEdJJ6b23kmvIKAXlBer3rSMaci+wsZ9cvTCnumQIV0xIDkE7dm0ek2jENdFPo11sCxEC4LFiROSTrakZkNiMVuagh48ugf4lB4U36XkD9DG420MtIZTmgkJBI0Uk52r0El497Gh7ZL4ThdoaGKSkiKjWD4Qoz2GFt+mCOocJmiU4h3qWxUWyjhjmjZszISh63WrHtx6sf40CfMdllzPpKmb8KC2I0VugA4B/5AgOChVHcR/g=
