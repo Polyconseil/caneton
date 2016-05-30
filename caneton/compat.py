@@ -21,7 +21,7 @@ def int_from_bytes(data, byteorder, signed=False):
 
     """
     if IS_PY3:
-        return int.from_bytes(data, byteorder, signed)
+        return int.from_bytes(data, byteorder, signed=signed)
 
     if not len(data):
         return 0
