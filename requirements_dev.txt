@@ -1,2 +1,2 @@
 # Used as main tests discovery
-nosetests
+nose
