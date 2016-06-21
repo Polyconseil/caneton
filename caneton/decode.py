@@ -177,7 +177,7 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         # current mode or the signal is not multiplexed.
         if (multiplexing_mode is None or
                 multiplexing_mode == signal_info.get('multiplexing', multiplexing_mode)):
-            if signal_info['bit_start'] > message_binary_length:
+            if signal_info['bit_start'] >= message_binary_length:
                 # The signal is invalid as the CAN frame is too small to contain it.
                 # However, new signals may be added to an already existing CAN frame,
                 # meaning the same DBC must support old versions with small frames
