@@ -14,7 +14,7 @@ setup(
     license="BSD-3-Clause",
     keywords="CAN DBC",
     url="https://github.com/polyconseil/caneton",
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests*']),
     long_description="",
     entry_points={
         'console_scripts': [
