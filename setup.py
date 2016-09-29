@@ -8,8 +8,8 @@ from caneton.version import VERSION
 setup(
     name="caneton",
     version=VERSION,
-    author="Polyconseil dev team",
-    author_email="autolib-dev@polyconseil.fr",
+    author="Polyconseil",
+    author_email="opensource+caneton@polyconseil.fr",
     description="Decode CAN messages",
     license="BSD-3-Clause",
     keywords="CAN DBC",
