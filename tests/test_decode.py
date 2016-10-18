@@ -30,7 +30,7 @@ class TestDecode(TestCase):
 
     def test_message(self):
         message_id = 0x701
-        message_data = binascii.unhexlify('01780178010000')
+        message_data = binascii.unhexlify('00780178010001')
         message_length = len(message_data)
 
         with open('./tests/dbc.json', 'r') as f:
