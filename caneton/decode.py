@@ -68,9 +68,9 @@ def signal_decode(signal_name, signal_info,
     return signal
 
 
-def message_get_current_multiplexing_mode(message_info, message_binary_msb, message_binary_lsb,
+def message_get_multiplexor(message_info, message_binary_msb, message_binary_lsb,
         message_binary_length):
-    """Extract the current multiplexing mode of the message if any.
+    """Extract the multiplexor information of the message if any.
 
     Arguments:
         message_info: dict, information about the message (name, signals)
@@ -79,18 +79,17 @@ def message_get_current_multiplexing_mode(message_info, message_binary_msb, mess
         message_binary_length: int, length of CAN message in binary format
 
     Returns:
-        multiplexing_mode: int, the current multiplexing mode or None
+        multiplexor: signal, the multiplexor decoded as signal or None if not found
     """
-    multiplexing_mode = None
     signals = message_info['signals']
     for signal_name, signal_info in signals.items():
         if signal_info.get('multiplexor', False):
-            signal = signal_decode(signal_name, signal_info, message_binary_msb, message_binary_lsb,
-                message_binary_length)
-            multiplexing_mode = signal['value']
-            break
+            if signal_info.get('little_endian', False):
+                # The message data must be swapped
+                (message_binary_msb, message_binary_lsb) = (message_binary_lsb, message_binary_msb)
 
-    return multiplexing_mode
+            return signal_decode(signal_name, signal_info, message_binary_msb, message_binary_lsb,
+                message_binary_length)
 
 def message_get_signal(message, signal_name):
     """Loop over signals to find the requested signal.
@@ -155,13 +154,14 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         message_binary_length)
 
     if message_info.get('has_multiplexor', False):
-        multiplexing_mode = message_get_current_multiplexing_mode(
+        multiplexor = message_get_multiplexor(
             message_info, message_binary_msb, message_binary_lsb,
             message_binary_length)
     else:
-        multiplexing_mode = None
-    message['multiplexing_mode'] = multiplexing_mode
+        multiplexor = None
 
+    multiplexing_mode = multiplexor['value'] if multiplexor else None
+    message['multiplexing_mode'] = multiplexing_mode
     message['raw_data'] = message_data
 
     if 'signals' not in message_info:
@@ -173,8 +173,9 @@ def message_decode(message_id, message_length, message_data, dbc_json):
         if signal_info.get('multiplexor', False):
             continue
 
-        # Decode signal only when no multiplexor or the signal is associated to the
-        # current mode or the signal is not multiplexed.
+        # Decode signal only when :
+        # - no multiplexing mode
+        # - or the signal is associated to the current multiplexing mode
         if (multiplexing_mode is None or
                 multiplexing_mode == signal_info.get('multiplexing', multiplexing_mode)):
             if signal_info['bit_start'] >= message_binary_length:
