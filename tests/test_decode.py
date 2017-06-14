@@ -29,20 +29,51 @@ class TestDecode(TestCase):
             "The string value extracted for signal 'Foo' is empty [-8:8].")
 
     def test_message(self):
-        message_id = 0x701
-        message_data = binascii.unhexlify('00780178010001')
-        message_length = len(message_data)
-
         with open('./tests/dbc.json', 'r') as f:
             dbc_json = json.loads(f.read())
 
+        message_data = binascii.unhexlify('01780178010000')
         message = caneton.message_decode(
-            message_id=message_id, message_length=message_length,
+            message_id=0x701, message_length=len(message_data),
             message_data=message_data, dbc_json=dbc_json)
         signal = caneton.message_get_signal(message, 'Bar2')
         self.assertEqual(signal['name'], 'Bar2')
         self.assertEqual(signal['value'], 188.0)
         self.assertEqual(signal['unit'], 'V')
+
+        message_data = binascii.unhexlify('041d000000000000')
+        message = caneton.message_decode(
+            message_id=0x63f,
+            message_length=len(message_data),
+            message_data=message_data,
+            dbc_json=dbc_json,
+        )
+        signal = caneton.message_get_signal(message, 'TempsChargeRestant')
+        self.assertIsNotNone(signal)
+        self.assertEqual(signal['value'], 29)
+        self.assertEqual(signal['unit'], 'mn')
+
+        message_data = binascii.unhexlify('00CDCCA042030000')
+        message = caneton.message_decode(
+            message_id=0x63f,
+            message_length=len(message_data),
+            message_data=message_data,
+            dbc_json=dbc_json,
+        )
+        signal = caneton.message_get_signal(message, 'Temperature_max')
+        self.assertIsNotNone(signal)
+        self.assertEqual(signal['value'], 1117834445)
+        self.assertEqual(signal['unit'], u'°C')
+
+        signal = caneton.message_get_signal(message, 'PuissanceDispoVch')
+        self.assertIsNotNone(signal)
+        self.assertEqual(signal['value'], 1)
+        self.assertEqual(signal['unit'], '')
+
+        signal = caneton.message_get_signal(message, 'PuissanceDispoVpack')
+        self.assertIsNotNone(signal)
+        self.assertEqual(signal['value'], 1)
+        self.assertEqual(signal['unit'], '')
 
     def test_message_wo_signals(self):
         message_id = 542

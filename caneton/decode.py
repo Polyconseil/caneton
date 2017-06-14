@@ -84,9 +84,6 @@ def message_get_multiplexor(message_info, message_binary_msb, message_binary_lsb
     signals = message_info['signals']
     for signal_name, signal_info in signals.items():
         if signal_info.get('multiplexor', False):
-            if signal_info.get('little_endian', False):
-                # The message data must be swapped
-                (message_binary_msb, message_binary_lsb) = (message_binary_lsb, message_binary_msb)
 
             return signal_decode(signal_name, signal_info, message_binary_msb, message_binary_lsb,
                 message_binary_length)

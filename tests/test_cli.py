@@ -15,7 +15,7 @@ class TestCLI(TestCase):
         self.parser = cli.create_parser()  # flake8: noqa
 
     def test_message_701(self):
-        args = self.parser.parse_args(['./tests/dbc.json', '0x701', '0x00780178010001'])
+        args = self.parser.parse_args(['./tests/dbc.json', '0x701', '0x01780178010000'])
         cleaned_args = cli.args_cleanup(args)
         args.dbcfile.close()
         message = caneton.message_decode(**cleaned_args)
