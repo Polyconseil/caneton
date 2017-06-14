@@ -9,8 +9,8 @@ from . import exceptions
 
 MESSAGE_MAX_LENGTH = 8
 
-def signal_decode(signal_name, signal_info,
-        message_binary_msb, message_binary_lsb, message_binary_length):
+
+def signal_decode(signal_name, signal_info, message_binary_msb, message_binary_lsb, message_binary_length):
     """
     Decode a signal of a CAN message
 
@@ -68,8 +68,7 @@ def signal_decode(signal_name, signal_info,
     return signal
 
 
-def message_get_multiplexor(message_info, message_binary_msb, message_binary_lsb,
-        message_binary_length):
+def message_get_multiplexor(message_info, message_binary_msb, message_binary_lsb, message_binary_length):
     """Extract the multiplexor information of the message if any.
 
     Arguments:
@@ -85,8 +84,14 @@ def message_get_multiplexor(message_info, message_binary_msb, message_binary_lsb
     for signal_name, signal_info in signals.items():
         if signal_info.get('multiplexor', False):
 
-            return signal_decode(signal_name, signal_info, message_binary_msb, message_binary_lsb,
-                message_binary_length)
+            return signal_decode(
+                signal_name,
+                signal_info,
+                message_binary_msb,
+                message_binary_lsb,
+                message_binary_length,
+            )
+
 
 def message_get_signal(message, signal_name):
     """Loop over signals to find the requested signal.
@@ -101,6 +106,7 @@ def message_get_signal(message, signal_name):
     for signal in message.get('signals', []):
         if signal.get('name') == signal_name:
             return signal
+
 
 def message_decode(message_id, message_length, message_data, dbc_json):
     """Decode a CAN message (also called a frame).
