@@ -1,2 +1,3 @@
 # Used as main tests discovery
-nose
+pytest
+pytest-randomly

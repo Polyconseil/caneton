@@ -1,2 +1,2 @@
 test:
-	nosetests
+	pytest tests/
