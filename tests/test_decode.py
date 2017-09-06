@@ -89,3 +89,31 @@ class TestDecode(TestCase):
         self.assertEqual(message['signals'], [])
         self.assertEqual(
             caneton.message_get_signal(message, 'Doesntexist'), None)
+
+    def test_message_with_float_type(self):
+        with open('./tests/dbc.json', 'r') as f:
+            dbc_json = json.loads(f.read())
+
+        message_data = binascii.unhexlify('0000284200000000')
+        message = caneton.message_decode(
+            message_id=0x63e, message_length=len(message_data),
+            message_data=message_data, dbc_json=dbc_json,
+        )
+        signal = caneton.message_get_signal(message, 'HvBatteryCurrent_Puissance')
+        self.assertEqual(signal['name'], 'HvBatteryCurrent_Puissance')
+        self.assertEqual(signal['value'], 42.0)
+        self.assertEqual(signal['unit'], 'A')
+
+    def test_message_with_double_type(self):
+        with open('./tests/dbc.json', 'r') as f:
+            dbc_json = json.loads(f.read())
+
+        message_data = binascii.unhexlify('0000000000004540')
+        message = caneton.message_decode(
+            message_id=0x63e, message_length=len(message_data),
+            message_data=message_data, dbc_json=dbc_json,
+        )
+        signal = caneton.message_get_signal(message, 'HvBatteryCurrent_PuissanceDouble')
+        self.assertEqual(signal['name'], 'HvBatteryCurrent_PuissanceDouble')
+        self.assertEqual(signal['value'], 42.0)
+        self.assertEqual(signal['unit'], 'A')

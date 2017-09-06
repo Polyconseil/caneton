@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 #
 
+import struct
+
 from . import compat
 from . import exceptions
 
@@ -60,9 +62,16 @@ def signal_decode(signal_name, signal_info, message_binary_msb, message_binary_l
             "The string value extracted for signal '%s' is empty [%d:%d]." %
             (signal_name, signal['bit_start'], signal['bit_end']))
 
+    value_type = signal_info.get('value_type', 'integer')
+    value = int(s_value, 2)
+    if value_type == 'float':
+        value = struct.unpack('f', struct.pack('I', value))[0]
+    elif value_type == 'double':
+        value = struct.unpack('d', struct.pack('Q', value))[0]
+
     signal['factor'] = signal_info.get('factor', 1)
     signal['offset'] = signal_info.get('offset', 0)
-    signal['value'] = int(s_value, 2) * signal['factor'] + signal['offset']
+    signal['value'] = value * signal['factor'] + signal['offset']
     signal['unit'] = signal_info.get('unit', '')
 
     return signal

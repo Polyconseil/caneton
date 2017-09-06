@@ -197,6 +197,41 @@
       },
       "has_multiplexor": true
     },
+    "1598": {
+      "name": "PWT_CCAN_BATPOWER_V4",
+      "sender": "PWT",
+      "length": 8,
+      "attributes": {
+        "GenMsgCycleTime": "100",
+        "GenMsgSendType": "0"
+      },
+      "signals": {
+        "HvBatteryCurrent_Puissance": {
+          "bit_start": 0,
+          "length": 32,
+          "little_endian": 1,
+          "signed": 1,
+          "value_type": "float",
+          "factor": 1,
+          "offset": 0,
+          "min": -400,
+          "max": 400,
+          "unit": "A"
+        },
+        "HvBatteryCurrent_PuissanceDouble": {
+          "bit_start": 0,
+          "length": 64,
+          "little_endian": 1,
+          "signed": 1,
+          "value_type": "double",
+          "factor": 1,
+          "offset": 0,
+          "min": -400,
+          "max": 400,
+          "unit": "A"
+        }
+      }
+    },
     "542": {
       "name": "BUS_MMI_4",
       "sender": "MASTER33",
