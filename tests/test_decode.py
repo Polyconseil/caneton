@@ -117,3 +117,31 @@ class TestDecode(TestCase):
         self.assertEqual(signal['name'], 'HvBatteryCurrent_PuissanceDouble')
         self.assertEqual(signal['value'], 42.0)
         self.assertEqual(signal['unit'], 'A')
+
+    def test_message_with_positive_signed_int_type(self):
+        with open('./tests/dbc.json', 'r') as f:
+            dbc_json = json.loads(f.read())
+
+        message_data = binascii.unhexlify('1100E80300000000')
+        message = caneton.message_decode(
+            message_id=0x195, message_length=len(message_data),
+            message_data=message_data, dbc_json=dbc_json,
+        )
+        signal = caneton.message_get_signal(message, 'truck_speed')
+        self.assertEqual(signal['name'], 'truck_speed')
+        self.assertEqual(signal['value'], 10.0)
+        self.assertEqual(signal['unit'], 'km/h')
+
+    def test_message_with_negative_signed_int_type(self):
+        with open('./tests/dbc.json', 'r') as f:
+            dbc_json = json.loads(f.read())
+
+        message_data = binascii.unhexlify('1100F9FB00000000')
+        message = caneton.message_decode(
+            message_id=0x195, message_length=len(message_data),
+            message_data=message_data, dbc_json=dbc_json,
+        )
+        signal = caneton.message_get_signal(message, 'truck_speed')
+        self.assertEqual(signal['name'], 'truck_speed')
+        self.assertEqual(signal['value'], -10.31)
+        self.assertEqual(signal['unit'], 'km/h')

@@ -64,7 +64,11 @@ def signal_decode(signal_name, signal_info, message_binary_msb, message_binary_l
 
     value_type = signal_info.get('value_type', 'integer')
     value = int(s_value, 2)
-    if value_type == 'float':
+    signed = signal_info.get('signed', 0)
+    if value_type == 'integer' and signed:
+        if len(s_value) > 1 and int(s_value[0], 2):
+            value = int(s_value[1:], 2) - 2**(len(s_value) - 1)
+    elif value_type == 'float':
         value = struct.unpack('f', struct.pack('I', value))[0]
     elif value_type == 'double':
         value = struct.unpack('d', struct.pack('Q', value))[0]
