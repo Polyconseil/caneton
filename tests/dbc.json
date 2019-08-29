@@ -15,6 +15,51 @@
     }
   },
   "messages": {
+    "1942": {
+      "name": "TU_FLOAT_INTEGER",
+      "sender": "TU",
+      "length": 8,
+      "signals": {
+        "Foo1": {
+          "bit_start": 32,
+          "length": 8,
+          "little_endian": 1,
+          "factor": 1.0,
+          "offset": 0,
+          "min": 0,
+          "max": 0
+        },
+        "Foo2": {
+          "bit_start": 40,
+          "length": 8,
+          "little_endian": 1,
+          "factor": 1,
+          "offset": 0.0,
+          "min": 0,
+          "max": 0
+        },
+        "Bar1": {
+          "bit_start": 24,
+          "length": 16,
+          "little_endian": 1,
+          "factor": 0.5,
+          "offset": 0,
+          "min": 0,
+          "max": 0,
+          "unit": "V"
+        },
+        "Bar2": {
+          "bit_start": 8,
+          "length": 16,
+          "little_endian": 1,
+          "factor": 1,
+          "offset": 0.5,
+          "min": 0,
+          "max": 0,
+          "unit": "V"
+        }
+      }
+    },
     "1793": {
       "name": "CU_MULTI_FOO_BAR",
       "sender": "CU",

@@ -145,3 +145,33 @@ class TestDecode(TestCase):
         self.assertEqual(signal['name'], 'truck_speed')
         self.assertEqual(signal['value'], -10.31)
         self.assertEqual(signal['unit'], 'km/h')
+
+    def test_signal_decode_return_type(self):
+        with open('./tests/dbc.json', 'r') as f:
+            dbc_json = json.loads(f.read())
+
+        message_data = b'\xff\xff\xff\xff\xff\xff\xff\xff'
+        message = caneton.message_decode(
+            message_id=1942, message_length=len(message_data),
+            message_data=message_data, dbc_json=dbc_json,
+        )
+
+        # Factor is float and integer
+        signal = caneton.message_get_signal(message, 'Foo1')
+        self.assertEqual(signal['value'], 255)
+        self.assertIs(type(signal['value']), int)
+
+        # Offset is float and integer
+        signal = caneton.message_get_signal(message, 'Foo2')
+        self.assertEqual(signal['value'], 255)
+        self.assertIs(type(signal['value']), int)
+
+        # Factor is float but not integer
+        signal = caneton.message_get_signal(message, 'Bar1')
+        self.assertEqual(signal['value'], 32767.5)
+        self.assertIs(type(signal['value']), float)
+
+        # Offset is float but not integer
+        signal = caneton.message_get_signal(message, 'Bar2')
+        self.assertEqual(signal['value'], 65535.5)
+        self.assertIs(type(signal['value']), float)

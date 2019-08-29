@@ -73,8 +73,10 @@ def signal_decode(signal_name, signal_info, message_binary_msb, message_binary_l
     elif value_type == 'double':
         value = struct.unpack('d', struct.pack('Q', value))[0]
 
-    signal['factor'] = signal_info.get('factor', 1)
-    signal['offset'] = signal_info.get('offset', 0)
+    for name, default in [('factor', 1), ('offset', 0)]:
+        option_value = signal_info.get(name, default)
+        cast = int if float(option_value).is_integer() else float
+        signal[name] = cast(option_value)
     signal['value'] = value * signal['factor'] + signal['offset']
     signal['unit'] = signal_info.get('unit', '')
 
